@@ -14,7 +14,7 @@ def webhook():
 
     print ("ok")
 
-    return jsonify(res='ok')
+    return jsonify(res='ok',com='ok')
 
 if __name__ == '__main__':
     app.run()
