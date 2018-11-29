@@ -1,6 +1,20 @@
 
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask import jsonify
+from flask import request
+
+from urllib.parse import urlparse, urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+#ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
+from flask_cors import CORS, cross_origin
+
+
 app = Flask(__name__)
+CORS(app)       #クロスドメイン制約回避のおまじない
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -8,11 +22,12 @@ def home():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    if request.headers['Content-Type'] != 'application/json':
-        print('type:'+request.headers['Content-Type'])
-        return 'type:'
 
-    print ("ok")
+    print('1')
+    
+    data = request.get_json(force=True, silent=True)
+
+    print (data)
 
     return jsonify(res='ok',com='ok')
 
