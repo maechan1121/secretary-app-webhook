@@ -15,6 +15,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 #.envの使用
 import os
 
+#json
+import json
+
 #ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
 from flask_cors import CORS, cross_origin
 
@@ -73,7 +76,9 @@ def webhook():
     print (devNum)
     print (devList)
 
-    r = make_response(jsonify(speach='OK',displayText='OK'))
+    #r = make_response(jsonify(speach='OK',displayText='OK'))
+    data = {"speach":'OK',"displayText":'OK'}
+    r = json.dumps(data, indent=4)
     r.headers['Content-Type'] = 'application/json'
 
     print (r)
