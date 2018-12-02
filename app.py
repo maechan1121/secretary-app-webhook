@@ -16,6 +16,7 @@ import os
 
 #マルチスレッド
 import threading
+import time
 
 #ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
 from flask_cors import CORS, cross_origin
@@ -75,4 +76,5 @@ def func(mes):
     # A1セルを更新
     worksheet.update_cell(1,1, u'Hello, gspread.')
 
+    time.sleep(10)
     print("thread:")
