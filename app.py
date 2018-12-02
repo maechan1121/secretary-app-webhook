@@ -72,7 +72,7 @@ def webhook():
     #     i+=1
     # pass
 
-    print (data)
+    print (json.dumps(data, indent=4))
     print (devNum)
     print (devList)
 
