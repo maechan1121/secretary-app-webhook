@@ -68,7 +68,7 @@ def func(mes):
     #credentials = ServiceAccountCredentials.from_json_keyfile_name('secretary-api-1e3be6d434e0.json', scope)
     gc = gspread.authorize(credentials)
     # 共有設定したスプレッドシートの名前を指定する
-    worksheet = gc.open("secretary-pointinfo").sheet1
+    worksheet = gc.open("secretary-pointinfo").worksheet("test")
     #以下、動作テスト
     # A1セルの値を取得
     print(worksheet.cell(1,1))
