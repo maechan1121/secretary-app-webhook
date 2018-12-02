@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask import make_response
 
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
@@ -71,8 +72,11 @@ def webhook():
     print (data)
     print (devNum)
     print (devList)
-    
-    return jsonify(speach='.',displayText='.')
+
+    r = make_response(jsonify(speach='.',displayText='.'))
+    r.headers['Content-Type'] = 'application/json'
+
+    return r
 
 
 if __name__ == '__main__':
