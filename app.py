@@ -76,5 +76,3 @@ def func(mes):
     worksheet.update_cell(1,1, u'Hello, gspread.')
 
     print("thread:")
-    print(mes)
-
