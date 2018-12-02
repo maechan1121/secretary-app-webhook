@@ -16,7 +16,8 @@ import os
 
 #マルチスレッド
 import threading
-import time
+
+import asyncio
 
 #ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
 from flask_cors import CORS, cross_origin
@@ -35,9 +36,11 @@ def webhook():
     
     data = request.get_json(force=True, silent=True)
 
-    thread1 = threading.Thread(target=func(mes=data))
+    #thread1 = threading.Thread(target=func(mes=data))
 
-    thread1.start()
+    #thread1.start()
+
+    asyncio.ensure_future(func(mes=data))
 
     print (data)
     
@@ -47,7 +50,7 @@ if __name__ == '__main__':
     app.run()
 
 
-def func(mes):
+async def func(mes):
     #以下、spreadsheetの操作
     scope = ['https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive']
@@ -76,5 +79,6 @@ def func(mes):
     # A1セルを更新
     worksheet.update_cell(1,1, u'Hello, gspread.')
 
-    time.sleep(10)
     print("thread:")
+
+    pass
