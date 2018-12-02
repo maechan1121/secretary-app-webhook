@@ -73,8 +73,10 @@ def webhook():
     print (devNum)
     print (devList)
 
-    r = make_response(jsonify(speach='.',displayText='.'))
+    r = make_response(jsonify("{speach='.',displayText='.'}"))
     r.headers['Content-Type'] = 'application/json'
+
+    print (r)
 
     return r
 
