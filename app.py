@@ -52,16 +52,27 @@ def webhook():
     #credentials = ServiceAccountCredentials.from_json_keyfile_name('secretary-api-1e3be6d434e0.json', scope)
     gc = gspread.authorize(credentials)
     # 共有設定したスプレッドシートの名前を指定する
-    worksheet = gc.open("secretary-pointinfo").worksheet("test")
+    worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
+    
     #以下、動作テスト
-    # A1セルの値を取得
-    print(worksheet.cell(1,1))
-    # A1セルを更新
-    worksheet.update_cell(1,1, u'Hello, gspread.')
+    # 登録機器数を取得
+    devNum = worksheet.cell(1,2)
+
+    #機器名リスト
+    devList = worksheet.col_values(1)
+    #i = 0
+    #for dev in devList:
+    #    if i > devNum:
+    #        break
+    #     if dev == 
+    #     i+=1
+    # pass
 
     print (data)
+    print (devNum)
+    print (devList)
     
-    return jsonify(res='ok',com='ok')
+    return jsonify(speach='',displayText='')
 
 
 if __name__ == '__main__':
