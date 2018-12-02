@@ -72,9 +72,15 @@ def webhook():
     #     i+=1
     # pass
 
+    result = data.get('queryResult')
+    parameters = result.get('parameters')
+    strs = parameters.get('any')
+
     print (json.dumps(data, indent=4))
     print (devNum)
     print (devList)
+
+    
 
     #r = make_response(jsonify(speach='OK',displayText='OK'))
     data = {"fulfillmentText":' -'}
@@ -83,6 +89,8 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
 
     print (r)
+
+    print(strs)
 
     return r
 
