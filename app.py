@@ -79,6 +79,7 @@ def webhook():
     #r = make_response(jsonify(speach='OK',displayText='OK'))
     data = {"speach":'OK',"displayText":'OK'}
     r = json.dumps(data, indent=4)
+    r = make_response(r)
     r.headers['Content-Type'] = 'application/json'
 
     print (r)
