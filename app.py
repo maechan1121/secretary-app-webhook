@@ -14,10 +14,11 @@ from oauth2client.service_account import ServiceAccountCredentials
 #.envの使用
 import os
 
+#マルチスレッド
+import threading
+
 #ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
 from flask_cors import CORS, cross_origin
-
-
 
 app = Flask(__name__)
 CORS(app)       #クロスドメイン制約回避のおまじない
@@ -33,8 +34,19 @@ def webhook():
     
     data = request.get_json(force=True, silent=True)
 
+    thread1 = threading.Thread(target=func(mes=data))
+
+    thread1.start()
+
     print (data)
     
+    return jsonify(res='ok',com='ok')
+
+if __name__ == '__main__':
+    app.run()
+
+
+def func(mes):
     #以下、spreadsheetの操作
     scope = ['https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive']
@@ -62,9 +74,4 @@ def webhook():
     print(worksheet.cell(1,1))
     # A1セルを更新
     worksheet.update_cell(1,1, u'Hello, gspread.')
-
-    return jsonify(res='ok',com='ok')
-
-if __name__ == '__main__':
-    app.run()
 
