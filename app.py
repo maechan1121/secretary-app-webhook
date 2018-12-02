@@ -72,7 +72,7 @@ def webhook():
     print (devNum)
     print (devList)
     
-    return jsonify(speach='',displayText='')
+    return jsonify(speach='.',displayText='.')
 
 
 if __name__ == '__main__':
