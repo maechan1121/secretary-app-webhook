@@ -75,5 +75,6 @@ def func(mes):
     # A1セルを更新
     worksheet.update_cell(1,1, u'Hello, gspread.')
 
-    print("thread:"+mes)
+    print("thread:")
+    print(mes)
 
