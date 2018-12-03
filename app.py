@@ -53,8 +53,18 @@ def webhook():
     }
 
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(credential,scope)
-    #credentials = ServiceAccountCredentials.from_json_keyfile_name('secretary-api-1e3be6d434e0.json', scope)
     gc = gspread.authorize(credentials)
+    
+    result = data.get('queryResult')
+    if result is not None:
+        r = rec(result = result, gc = gc)
+        print (json.dumps(data, indent=4))
+    else:
+        print("Other Access")
+        r = phoneapp(data = data)
+    return r
+
+def rec(result, gc):
     # 共有設定したスプレッドシートの名前を指定する
     worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
     
@@ -64,19 +74,10 @@ def webhook():
 
     #機器名リスト
     devList = worksheet.col_values(1)
-    #i = 0
-    #for dev in devList:
-    #    if i > devNum:
-    #        break
-    #     if dev == 
-    #     i+=1
-    # pass
 
-    result = data.get('queryResult')
     parameters = result.get('parameters')
     strs = parameters.get('any')
 
-    print (json.dumps(data, indent=4))
     print (devNum)
     print (devList)
 
@@ -94,6 +95,14 @@ def webhook():
 
     return r
 
+def phoneapp(data):
+    r = {"test":"ok"}
+    r = json.dumps(r, indent=4)
+    r = make_response(r)
+    r.headers['Content-Type'] = 'application/json'
+    print (r)
+    
+    return r
 
 if __name__ == '__main__':
     app.run()
