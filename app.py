@@ -28,6 +28,7 @@ CORS(app)       #クロスドメイン制約回避のおまじない
 def home():
     return 'Hello World!'
 
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
 
