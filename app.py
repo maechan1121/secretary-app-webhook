@@ -96,6 +96,7 @@ def rec(result, gc):
 
     return r
 
+@app.route('/phone', methods=['POST'])
 def phoneapp(data):
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
