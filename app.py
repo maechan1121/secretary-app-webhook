@@ -66,12 +66,12 @@ def webhook():
 # row 行, col 列
 # google home
 def rec(data, gc):
-    flg = true
+    flg = True
 
     # 共有設定したスプレッドシートの名前を指定する
     workbook = gc.open("secretary-pointinfo")
     
-    worksheets = workbook.worksheet("リスト")
+    worksheet = workbook.worksheet("リスト")
 
     #以下、動作テスト
     # userID
@@ -80,29 +80,33 @@ def rec(data, gc):
     # 接続機器の登録を確認
     targetcell = cell_search(sheet = worksheet, str = uID)
 
-    if cell is not None:
-        sheetname = worksheets.cell(targetcell.row, 3).value
+    if targetcell is not None:
+        sheetname = worksheet.cell(targetcell.row, 3).value
 
         if sheetname is not None:
-            targetsheet ＝ workbook.worksheet(sheetname)
-            print ("a")
-        else :
-            flg = false
 
-        # 機器登録あり
-        data = {"fulfillmentText":' '}
-        r = json.dumps(data, indent=4)
-        r = make_response(r)
-        r.headers['Content-Type'] = 'application/json'
+            print ("a")
+            # 機器登録あり
+            data = {"fulfillmentText":' '}
+            r = json.dumps(data, indent=4)
+            r = make_response(r)
+            r.headers['Content-Type'] = 'application/json'
+            return r
+        else :
+            flg = False
+
 
     else:
+        flg = False
+        
+    if flg is False:
         # 機器登録なし
         data = {"fulfillmentText":'登録されていない機器です'}
         r = json.dumps(data, indent=4)
         r = make_response(r)
         r.headers['Content-Type'] = 'application/json'
+        return r
 
-    return r
 
 
 
