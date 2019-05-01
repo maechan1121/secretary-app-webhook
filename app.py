@@ -76,12 +76,11 @@ def rec(data, gc):
 
     # userID
     uID = data.get("originalDetectIntentRequest").get("payload").get("user").get("userId")
-    
-    celll = worksheet.find("aaaa")
-
-    if celll is None:
+    try:
+        celll = worksheet.find("aaaa")
         print ("a")
-    else:
+        
+    except CellNotFound:
         print ("B")
 
     print ("usetID:")
