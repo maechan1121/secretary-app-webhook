@@ -31,8 +31,6 @@ def home():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-
-    print('1')
     
     data = request.get_json(force=True, silent=True)
 
@@ -58,25 +56,31 @@ def webhook():
     
     result = data.get('queryResult')
     if result is not None:
-        r = rec(result = result, gc = gc)
+        r = rec(data = data, gc = gc)
         print (json.dumps(data, indent=4))
     else:
         print("Other Access")
         r = phoneapp(data = data, gc = gc)
     return r
 
-def rec(result, gc):
+def rec(data, gc):
     # 共有設定したスプレッドシートの名前を指定する
     worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
     
     #以下、動作テスト
     # 登録機器数を取得
-    devNum = worksheet.cell(1,2)
+    devNum = worksheet.cell(1,2).value
 
     #機器名リスト
     devList = worksheet.col_values(1)
 
-    parameters = result.get('parameters')
+    # userID
+    uID = data.get("originalDetectIntentRequest").get("payload").get("user").get("userId")
+    
+    print ("usetID:")
+    print (uID)
+
+    parameters = data.get('queryResult').get('parameters')
     strs = parameters.get('any')
 
     print ("devnum:")
@@ -99,8 +103,8 @@ def rec(result, gc):
     return r
 
 def phoneapp(data, gc):
-    workbook = worksheet = gc.open("secretary-pointinfo")
-    workbook.add_worksheet(title="testq", rows=100, cols=20)
+#     workbook = worksheet = gc.open("secretary-pointinfo")
+#     workbook.add_worksheet(title="testq", rows=100, cols=20)
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
     r = make_response(r)
