@@ -62,7 +62,7 @@ def webhook():
         print (json.dumps(data, indent=4))
     else:
         print("Other Access")
-        r = phoneapp(data = data)
+        r = phoneapp(data = data, gc = gc)
     return r
 
 def rec(result, gc):
@@ -96,8 +96,8 @@ def rec(result, gc):
 
     return r
 
-def phoneapp(data):
-    workbook = worksheet = gc.open_by_key("secretary-pointinfo")
+def phoneapp(data, gc):
+    workbook = worksheet = gc.open("secretary-pointinfo")
     workbook.add_worksheet(title="test")
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
