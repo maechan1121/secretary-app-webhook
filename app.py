@@ -83,7 +83,7 @@ def rec(data, gc):
     if targetcell is not None:
         sheetname = worksheet.cell(targetcell.row, 3).value
 
-        if sheetname is not None:
+        if sheetname is not "":
 
             print ("a")
             # 機器登録あり
