@@ -63,26 +63,29 @@ def webhook():
         r = phoneapp(data = data, gc = gc)
     return r
 
+# google home
 def rec(data, gc):
     # 共有設定したスプレッドシートの名前を指定する
-    worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
+    workbook = gc.open("secretary-pointinfo").worksheet("リスト")
     
+    worksheet = workbook.worksheet("リスト")
+
     #以下、動作テスト
-    # 登録機器数を取得
+    # userID
+    uID = data.get("originalDetectIntentRequest").get("payload").get("user").get("userId")
+
+    cell = cell_search(sheet = worksheet, str = uID)
+
+    print (cell.col)
+    print (cell.row)
+    
+# 登録機器数を取得
     devNum = worksheet.cell(1,2).value
 
     #機器名リスト
     devList = worksheet.col_values(1)
 
-    # userID
-    uID = data.get("originalDetectIntentRequest").get("payload").get("user").get("userId")
-    try:
-        celll = worksheet.find("aaaa")
-        print ("a")
-
-    except gspread.exceptions.CellNotFound:
-        print ("B")
-
+    
     print ("usetID:")
     print (uID)
 
@@ -109,8 +112,7 @@ def rec(data, gc):
     return r
 
 def phoneapp(data, gc):
-#     workbook = worksheet = gc.open("secretary-pointinfo")
-#     workbook.add_worksheet(title="testq", rows=100, cols=20)
+    worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
     r = make_response(r)
@@ -118,6 +120,16 @@ def phoneapp(data, gc):
     print (r)
     
     return r
+
+def cell_search(sheet, str):
+    try:
+        cell = sheet.find("aaaa")
+        
+        return cell
+
+    except gspread.exceptions.CellNotFound:
+        
+        return None
 
 if __name__ == '__main__':
     app.run()
