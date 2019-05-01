@@ -66,7 +66,7 @@ def webhook():
 # google home
 def rec(data, gc):
     # 共有設定したスプレッドシートの名前を指定する
-    workbook = gc.open("secretary-pointinfo").worksheet("リスト")
+    workbook = gc.open("secretary-pointinfo")
     
     worksheet = workbook.worksheet("リスト")
 
@@ -78,7 +78,7 @@ def rec(data, gc):
 
     print (cell.col)
     print (cell.row)
-    
+
 # 登録機器数を取得
     devNum = worksheet.cell(1,2).value
 
