@@ -82,11 +82,15 @@ def rec(data, gc):
 
     if targetcell is not None:
         sheetname = worksheet.cell(targetcell.row, 3).value
+        print ("sheetname")
+        print (sheetname)
 
         if sheetname is not "":
             worksheet = workbook.worksheet(sheetname)
             
             offset = worksheet.cell(1, 1)
+            print ("offset")
+            print (offset)
 
             if offset is "":
                 worksheet.update_cell(1, 1, 0)
