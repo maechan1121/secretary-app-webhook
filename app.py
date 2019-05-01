@@ -63,53 +63,49 @@ def webhook():
         r = phoneapp(data = data, gc = gc)
     return r
 
+# row 行, col 列
 # google home
 def rec(data, gc):
+    flg = true
+
     # 共有設定したスプレッドシートの名前を指定する
     workbook = gc.open("secretary-pointinfo")
     
-    worksheet = workbook.worksheet("リスト")
+    worksheets = workbook.worksheet("リスト")
 
     #以下、動作テスト
     # userID
     uID = data.get("originalDetectIntentRequest").get("payload").get("user").get("userId")
 
-    cell = cell_search(sheet = worksheet, str = uID)
+    # 接続機器の登録を確認
+    targetcell = cell_search(sheet = worksheet, str = uID)
 
-    print (cell.col)
-    print (cell.row)
+    if cell is not None:
+        sheetname = worksheets.cell(targetcell.row, 3).value
 
-# 登録機器数を取得
-    devNum = worksheet.cell(1,2).value
+        if sheetname is not None:
+            targetsheet ＝ workbook.worksheet(sheetname)
+            print ("a")
+        else :
+            flg = false
 
-    #機器名リスト
-    devList = worksheet.col_values(1)
+        # 機器登録あり
+        data = {"fulfillmentText":' '}
+        r = json.dumps(data, indent=4)
+        r = make_response(r)
+        r.headers['Content-Type'] = 'application/json'
 
-    
-    print ("usetID:")
-    print (uID)
-
-    parameters = data.get('queryResult').get('parameters')
-    strs = parameters.get('any')
-
-    print ("devnum:")
-    print (devNum)
-    print ("devlist:")
-    print (devList)
-
-    
-
-    #r = make_response(jsonify(speach='OK',displayText='OK'))
-    data = {"fulfillmentText":' '}
-    r = json.dumps(data, indent=4)
-    r = make_response(r)
-    r.headers['Content-Type'] = 'application/json'
-
-    print (r)
-
-    print(strs)
+    else:
+        # 機器登録なし
+        data = {"fulfillmentText":'登録されていない機器です'}
+        r = json.dumps(data, indent=4)
+        r = make_response(r)
+        r.headers['Content-Type'] = 'application/json'
 
     return r
+
+
+
 
 def phoneapp(data, gc):
     worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
@@ -123,7 +119,7 @@ def phoneapp(data, gc):
 
 def cell_search(sheet, str):
     try:
-        cell = sheet.find("aaaa")
+        cell = sheet.find(str)
         
         return cell
 
