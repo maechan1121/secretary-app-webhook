@@ -96,8 +96,9 @@ def rec(result, gc):
 
     return r
 
-@app.route('/phone', methods=['POST'])
 def phoneapp(data):
+    workbook = worksheet = gc.open("secretary-pointinfo")
+    workbook.add_worksheet(title="test")
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
     r = make_response(r)
