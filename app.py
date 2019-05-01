@@ -76,7 +76,8 @@ def rec(data, gc):
 
     cell = cell_search(sheet = worksheet, str = uID)
 
-    print (cell)
+    print (cell.col)
+    print (cell.row)
 
 # 登録機器数を取得
     devNum = worksheet.cell(1,2).value
