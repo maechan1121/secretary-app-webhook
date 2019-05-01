@@ -91,6 +91,7 @@ def rec(data, gc):
             if offset is "":
                 worksheet.update_cell(1, 1, 0)
             elif (offset >= 0):
+                flg = True
             else:
                 flg = False
             if flg is True:
