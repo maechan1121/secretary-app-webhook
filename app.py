@@ -79,8 +79,10 @@ def rec(result, gc):
     parameters = result.get('parameters')
     strs = parameters.get('any')
 
-    print ("devnum:" + devNum)
-    print ("devlist:" + devList)
+    print ("devnum:")
+    print (devNum)
+    print ("devlist:")
+    print (devList)
 
     
 
