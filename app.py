@@ -98,7 +98,7 @@ def rec(result, gc):
 
 def phoneapp(data, gc):
     workbook = worksheet = gc.open("secretary-pointinfo")
-    workbook.add_worksheet(title="test")
+    workbook.add_worksheet(title="test", row=100, col=20)
     r = {"test":"ok"}
     r = json.dumps(r, indent=4)
     r = make_response(r)
