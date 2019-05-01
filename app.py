@@ -84,18 +84,26 @@ def rec(data, gc):
         sheetname = worksheet.cell(targetcell.row, 3).value
 
         if sheetname is not "":
+            worksheet = workbook.worksheet(sheetname)
+            
+            offset = worksheet.cell(1, 1)
 
-            print ("a")
-            # 機器登録あり
-            data = {"fulfillmentText":' '}
-            r = json.dumps(data, indent=4)
-            r = make_response(r)
-            r.headers['Content-Type'] = 'application/json'
-            return r
+            if offset is "":
+                worksheet.update_cell(1, 1, 0)
+            elif (offset >= 0):
+            else:
+                flg = False
+            if flg is True:
+                worksheet.update_cell(offset + 1, 1, data.get("queryResult").get("queryText"))
+                # 機器登録あり
+                data = {"fulfillmentText":' '}
+                r = json.dumps(data, indent=4)
+                r = make_response(r)
+                r.headers['Content-Type'] = 'application/json'
+                worksheet.update_cell(1, 1, offset + 1)
+                return r
         else :
             flg = False
-
-
     else:
         flg = False
         
