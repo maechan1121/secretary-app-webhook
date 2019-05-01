@@ -88,7 +88,7 @@ def rec(data, gc):
         if sheetname is not "":
             worksheet = workbook.worksheet(sheetname)
             
-            offset = worksheet.cell(1, 1)
+            offset = worksheet.cell(1, 1).value
             print ("offset")
             print (offset)
 
