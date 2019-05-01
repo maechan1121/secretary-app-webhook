@@ -79,8 +79,8 @@ def rec(data, gc):
     try:
         celll = worksheet.find("aaaa")
         print ("a")
-        
-    except CellNotFound:
+
+    except gspread.exceptions.CellNotFound:
         print ("B")
 
     print ("usetID:")
