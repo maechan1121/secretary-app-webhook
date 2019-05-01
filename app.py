@@ -100,7 +100,7 @@ def rec(data, gc):
                 else:
                     flg = False
             if flg is True:
-                worksheet.update_cell(int(offset) + 1, 1, data.get("queryResult").get("queryText"))
+                worksheet.update_cell(int(offset) + 2, 1, data.get("queryResult").get("queryText"))
                 # 機器登録あり
                 data = {"fulfillmentText":' '}
                 r = json.dumps(data, indent=4)
