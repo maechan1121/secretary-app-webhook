@@ -165,7 +165,7 @@ def phoneapp(data, gc):
         r['items'] = items
         
     elif types == "showsec":
-        print (data.get("types"))
+        print (data)
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
         rows = worksheet.cell(1,1).value
         cells = worksheet.range(2, 1, rows, 1)
