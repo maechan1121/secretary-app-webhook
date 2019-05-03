@@ -129,7 +129,7 @@ def rec(data, gc):
 def phoneapp(data, gc):
     worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
     print ("value1")
-    print(value1)
+    print(data.get("value1"))
 
     uid = cell_search(sheet=worksheet, str=data.get("value1"))
 
