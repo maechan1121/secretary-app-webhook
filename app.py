@@ -131,9 +131,11 @@ def phoneapp(data, gc):
     worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
 
     cell = cell_search(sheet=worksheet, str=data.get("userID"))
-
+    print(cell)
     if cell is not None:
+        print("1")
         if cell.col is 1:
+            print("2")
             if worksheet.cell(cell.row, 1) is data.get("password"):
                 r = {"result":"OK"}
 
