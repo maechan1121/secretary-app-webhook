@@ -136,9 +136,9 @@ def phoneapp(data, gc):
         print("1")
         if cell.col is 1:
             print("2")
-            print(worksheet.cell(cell.row, 1))
+            print(worksheet.cell(cell.row, 2))
             print(data.get("password"))
-            if worksheet.cell(cell.row, 1) is data.get("password"):
+            if worksheet.cell(cell.row, 2) is data.get("password"):
                 r = {"result":"OK"}
 
     r = json.dumps(r, indent=4)
