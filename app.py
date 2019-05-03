@@ -85,14 +85,14 @@ def rec(data, gc):
         print ("sheetname")
         print (sheetname)
 
-        if sheetname is not "":
+        if sheetname != "":
             worksheet = workbook.worksheet(sheetname)
             
             offset = worksheet.cell(1, 1).value
             print ("offset")
             print (offset)
 
-            if offset is "":
+            if offset == "":
                 worksheet.update_cell(1, 1, 0)
                 offset = "0"
             else:
@@ -100,7 +100,7 @@ def rec(data, gc):
                     flg = True
                 else:
                     flg = False
-            if flg is True:
+            if flg == True:
                 worksheet.update_cell(int(offset) + 2, 1, data.get("queryResult").get("queryText"))
                 # 機器登録あり
                 data = {"fulfillmentText":' '}
@@ -114,7 +114,7 @@ def rec(data, gc):
     else:
         flg = False
         
-    if flg is False:
+    if flg == False:
         # 機器登録なし
         data = {"fulfillmentText":'登録されていない機器です'}
         r = json.dumps(data, indent=4)
@@ -134,11 +134,11 @@ def phoneapp(data, gc):
     print(cell)
     if cell is not None:
         print("1")
-        if cell.col is 1:
+        if cell.col == 1:
             print("2")
-            print(worksheet.cell(cell.row, 2))
+            print(worksheet.cell(cell.row, 2).value)
             print(data.get("password"))
-            if worksheet.cell(cell.row, 2).value is data.get("password"):
+            if worksheet.cell(cell.row, 2).value == data.get("password"):
                 r = {"result":"OK"}
 
     r = json.dumps(r, indent=4)
