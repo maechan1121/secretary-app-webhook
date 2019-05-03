@@ -128,6 +128,7 @@ def rec(data, gc):
 
 def phoneapp(data, gc):
     r = {"result":"NG"}
+    print (data)
 
     if data.get("types") == "login":
         print (data.get("types"))
