@@ -176,8 +176,9 @@ def phoneapp(data, gc):
 
         r['data'] = items
     else:
+        print (data.get("types"))
         print("error")
-        
+
     r = json.dumps(r)
     r = make_response(r)
     r.headers['Content-Type'] = 'application/json'
