@@ -129,8 +129,9 @@ def rec(data, gc):
 def phoneapp(data, gc):
     r = {"result":"NG"}
     print (data)
+    types = data.get("types")
 
-    if data.get("types") == "login":
+    if  types== "login":
         print (data.get("types"))
         worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
 
@@ -144,7 +145,8 @@ def phoneapp(data, gc):
                 print(data.get("data").get("password"))
                 if worksheet.cell(cell.row, 2).value == data.get("data").get("password"):
                     r = {"result":"OK"}
-    elif data.get("type") == "getlist":
+
+    elif types == "getlist":
         print (data.get("types"))
         worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
         rows = cell_search(sheet=worksheet, str=data.get("data").get("userID")).row
