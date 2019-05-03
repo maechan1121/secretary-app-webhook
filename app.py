@@ -128,18 +128,30 @@ def rec(data, gc):
 
 def phoneapp(data, gc):
     r = {"result":"NG"}
-    worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
 
-    cell = cell_search(sheet=worksheet, str=data.get("userID"))
-    print(cell)
-    if cell is not None:
-        print("1")
-        if cell.col == 1:
-            print("2")
-            print(worksheet.cell(cell.row, 2).value)
-            print(data.get("password"))
-            if worksheet.cell(cell.row, 2).value == data.get("password"):
-                r = {"result":"OK"}
+    if data.get("type") == "login":
+        worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
+
+        cell = cell_search(sheet=worksheet, str=data.get("data").get("userID"))
+        print(cell)
+        if cell is not None:
+            print("1")
+            if cell.col == 1:
+                print("2")
+                print(worksheet.cell(cell.row, 2).value)
+                print(data.get("data").get("password"))
+                if worksheet.cell(cell.row, 2).value == data.get("data").get("password"):
+                    r = {"result":"OK"}
+    elif data.get("type") == "getlist":
+        worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
+        rows = cell_search(sheet=worksheet, str=data.get("data").get("userID")).row
+        itemnum = worksheet.cell(rows, 3).value
+        r = {"num" : itemnum}
+
+        items = worksheet.range(cell(row, 4), cell(row, 4 + itemnum))
+
+        r['items'] = items
+
 
     r = json.dumps(r, indent=4)
     r = make_response(r)
