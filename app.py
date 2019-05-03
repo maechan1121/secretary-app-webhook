@@ -127,18 +127,19 @@ def rec(data, gc):
 
 
 def phoneapp(data, gc):
+    r = {"result":"NG"}
     worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
-    print ("value1")
-    print(data.get("value1"))
 
-    uid = cell_search(sheet=worksheet, str=data.get("value1"))
+    cell = cell_search(sheet=worksheet, str=data.get("userID"))
 
-    r = {"test":"ok"}
+    if cell is not None:
+        if cell.col is 1:
+            if worksheet.cell(cell.row, 1) is data.get("password"):
+                r = {"result":"OK"}
+
     r = json.dumps(r, indent=4)
     r = make_response(r)
     r.headers['Content-Type'] = 'application/json'
-    print (r)
-    
     return r
 
 def cell_search(sheet, str):
