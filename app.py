@@ -144,12 +144,8 @@ def phoneapp(data, gc):
                 print(data.get("data").get("password"))
                 if worksheet.cell(cell.row, 2).value == data.get("data").get("password"):
                     r = {"result":"OK"}
-                    cells = worksheet.range(3, 4, 3, 4 + 4)
-                    items = []
-                    for cell in cells:
-                        items.append(cell.value)
-                    print(items)
     elif data.get("type") == "getlist":
+        print (data.get("types"))
         worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
         rows = cell_search(sheet=worksheet, str=data.get("data").get("userID")).row
         itemnum = worksheet.cell(rows, 3).value
@@ -157,7 +153,7 @@ def phoneapp(data, gc):
         print("itemnum")
         print(itemnum)
 
-        cells = worksheet.range(rows, 4, rows, 4 + int(itemnum))
+        cells = worksheet.range(rows, 4, rows, 3 + int(itemnum))
 
         items = []
         for cell in cells:
