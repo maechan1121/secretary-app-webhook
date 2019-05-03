@@ -165,7 +165,7 @@ def phoneapp(data, gc):
         r['items'] = items
 
 
-    r = json.dumps(r, indent=4)
+    r = json.dumps(r)
     r = make_response(r)
     r.headers['Content-Type'] = 'application/json'
     return r
