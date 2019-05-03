@@ -173,8 +173,9 @@ def phoneapp(data, gc):
         items = []
         for cell in cells:
             items.append(cell.value)
+        r = {"result":"OK"}
 
-        r = {'data': items}
+        r['data'] = items
     else:
         print (data.get("types"))
         print("error")
