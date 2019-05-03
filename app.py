@@ -163,7 +163,18 @@ def phoneapp(data, gc):
         print(items)
 
         r['items'] = items
+        
+    elif types == "showsec":
+        print (data.get("types"))
+        worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
+        rows = worksheet.cell(1,1).value
+        cells = worksheet.range(2, 1, rows, 1)
 
+        items = []
+        for cell in cells:
+            items.append(cell.value)
+            
+        r['data'] = items
 
     r = json.dumps(r)
     r = make_response(r)
