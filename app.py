@@ -173,9 +173,11 @@ def phoneapp(data, gc):
         items = []
         for cell in cells:
             items.append(cell.value)
-            
-        r['data'] = items
 
+        r['data'] = items
+    else:
+        print("error")
+        
     r = json.dumps(r)
     r = make_response(r)
     r.headers['Content-Type'] = 'application/json'
