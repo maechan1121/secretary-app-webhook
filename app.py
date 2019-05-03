@@ -174,7 +174,7 @@ def phoneapp(data, gc):
         for cell in cells:
             items.append(cell.value)
 
-        r['data'] = items
+        r = {'data': items}
     else:
         print (data.get("types"))
         print("error")
