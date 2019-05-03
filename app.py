@@ -154,10 +154,10 @@ def phoneapp(data, gc):
         rows = cell_search(sheet=worksheet, str=data.get("data").get("userID")).row
         itemnum = worksheet.cell(rows, 3).value
         r = {"num" : itemnum}
-        print("rows")
-        print(rows)
+        print("itemnum")
+        print(itemnum)
 
-        cells = worksheet.range(rows, 4, rows, 4 + itemnum)
+        cells = worksheet.range(rows, 4, rows, 4 + int(itemnum))
 
         items = []
         for cell in cells:
