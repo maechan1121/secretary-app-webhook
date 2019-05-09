@@ -176,8 +176,14 @@ def phoneapp(data, gc):
     elif types == "savedata":
         print (data)
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
+        oldlen = int(worksheet.cell(1,1).value)
         worksheet.update_cell(1,1, int(data.get("length")))
         items = data.get("list")
+        if oldlen > int(data.get("length")):
+            cell_list = worksheet.range(int(data.get("length")) + 1,1, oldlen + 1, 1)
+            for cell in cell_list:
+                cell.value = ''
+            worksheet.update_cells(cell_list)
         cells = worksheet.range(2, 1, data.get("length") + 1, 1)
         i = 2
         for text in items:
