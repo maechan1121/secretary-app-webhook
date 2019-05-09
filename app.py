@@ -122,10 +122,6 @@ def rec(data, gc):
         r.headers['Content-Type'] = 'application/json'
         return r
 
-
-
-
-
 def phoneapp(data, gc):
     r = {"result":"NG"}
     print (data)
@@ -176,6 +172,12 @@ def phoneapp(data, gc):
         r = {"result":"OK"}
 
         r['data'] = items
+
+    elif types == "savedata":
+        print (data)
+        # worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
+
+
     else:
         print (data.get("types"))
         print("error")
