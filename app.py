@@ -164,6 +164,8 @@ def phoneapp(data, gc):
         print (data)
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
         rows = worksheet.cell(1,1).value
+        if rows=="":
+            rows="0"
         cells = worksheet.range(2, 1, int(rows) + 1, 1)
 
         items = []
