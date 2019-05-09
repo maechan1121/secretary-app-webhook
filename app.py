@@ -208,6 +208,32 @@ def phoneapp(data, gc):
 
         r = {"result":"OK"}
 
+    elif types == "getDev":
+        print(data)
+        worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
+        num = int(worksheet.cell(1,1).value)
+        devs = []
+        cells = worksheet.range(2,2,num+1, 2)
+        
+        r = {"result":"OK"}
+
+        r["devs"] = devs
+
+    elif types == "addSheetG":
+        print(data)
+        gc.open("secretary-pointinfo").add_worksheet(title=data.get("secname"), rows=100, cols=26)
+        worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
+        rows = int(cell_search(sheet=worksheet, str=data.get("userID")).row)
+        worksheet.update_cell(rows, int(worksheet.cell(rows, 3).value) + 3 + 1, data.get("secname"))
+        worksheet.update_cell(rows, 3, int(worksheet.cell(rows, 3).value) + 1)
+        
+        worksheet = gc.open("secretary-pointinfo").worksheet("リスト")
+        rows = int(cell_search(sheet=worksheet, str=data.get("devname")).row)
+        worksheet.update_cell(rows, 3, data.get("secname"))
+
+        r = {"result":"OK"}
+
+
     else:
         print (data.get("types"))
         print("error")
