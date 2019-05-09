@@ -165,6 +165,7 @@ def phoneapp(data, gc):
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
         rows = worksheet.cell(1,1).value
         items = []
+        
         if rows=="":
             rows="0"
             worksheet.update_cell(1,1, 0)
