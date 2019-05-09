@@ -215,6 +215,8 @@ def phoneapp(data, gc):
         devs = []
         cells = worksheet.range(2,2,num+1, 2)
         
+        for cell in cells:
+            devs.append(cell.value)
         r = {"result":"OK"}
 
         r["devs"] = devs
