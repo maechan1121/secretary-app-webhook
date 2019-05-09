@@ -178,7 +178,7 @@ def phoneapp(data, gc):
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
         worksheet.update_cell(1,1, int(data.get("length")))
         items = data.get("list")
-        cells = worksheet.range(2, 1, int(rows) + 1, 1)
+        cells = worksheet.range(2, 1, data.get("length") + 1, 1)
         i = 2
         for text in items:
             if cells[i-2] != text:
