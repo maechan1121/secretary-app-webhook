@@ -176,11 +176,11 @@ def phoneapp(data, gc):
     elif types == "savedata":
         print (data)
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
-        worksheet.cell(1,1).value = int(data.get("length"))
+        worksheet.update_cell(1,1, int(data.get("length")))
         items = data.get("list")
         i = 2
         for text in items:
-            worksheet.cell(i,1).value = text
+            worksheet.update_cell(i,1, text)
             i+=1
         
         r = {"result":"OK"}
