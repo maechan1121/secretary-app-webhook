@@ -168,7 +168,7 @@ def phoneapp(data, gc):
         print (data)
         worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
         rows = worksheet.cell(1,1).value
-        cells = worksheet.range(2, 1, rows, 1)
+        cells = worksheet.range(2, 1, rows + 1, 1)
 
         items = []
         for cell in cells:
