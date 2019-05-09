@@ -175,8 +175,14 @@ def phoneapp(data, gc):
 
     elif types == "savedata":
         print (data)
-        # worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
-
+        worksheet = gc.open("secretary-pointinfo").worksheet(data.get("secname"))
+        worksheet.cell(1,1).value = int(data.get("length"))
+        i = 2
+        for text in items:
+            worksheet.cell(i,1).value = text
+            i+=1
+        
+        r = {"result":"OK"}
 
     else:
         print (data.get("types"))
