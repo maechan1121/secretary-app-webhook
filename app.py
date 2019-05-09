@@ -192,6 +192,14 @@ def phoneapp(data, gc):
             i+=1
         
         r = {"result":"OK"}
+        
+    elif types == "addSheet":
+        print(data)
+        gc.open("secretary-pointinfo").add_worksheet(title=data.get("secname"), rows=100, cols=26)
+        worksheet = gc.open("secretary-pointinfo").worksheet("ログイン")
+        rows = int(cell_search(sheet=worksheet, str=data.get("data").get("userID")).row)
+        worksheet.update_cell(rows, int(worksheet.cell(rows, 3).value) + 1, data.get("secname"))
+        worksheet.update_cell(rows, 3, int(worksheet.cell(rows, 3).value) + 1)
 
     else:
         print (data.get("types"))
