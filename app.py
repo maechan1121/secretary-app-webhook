@@ -166,6 +166,7 @@ def phoneapp(data, gc):
         rows = worksheet.cell(1,1).value
         if rows=="":
             rows="0"
+            worksheet.update_cell(1,1, 0)
         cells = worksheet.range(2, 1, int(rows) + 1, 1)
 
         items = []
